@@ -58,6 +58,7 @@ public class SecurityLabelConsentService implements IConsentService {
 
   @Override
   public ConsentOutcome willSeeResource(RequestDetails requestDetails, IBaseResource iBaseResource, IConsentContextServices iConsentContextServices) {
+    // TODO: Edit out the security labels in the response ... the user has no need to see them
     return ConsentOutcome.AUTHORIZED;
   }
 

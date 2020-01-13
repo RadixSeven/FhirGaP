@@ -8,8 +8,10 @@ import ca.uhn.fhir.rest.client.interceptor.LoggingInterceptor;
 import ca.uhn.fhir.test.utilities.JettyUtil;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.hl7.fhir.instance.model.api.IBaseMetaType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -39,12 +41,28 @@ public class ExampleServerDstu2IT {
 
 		Patient pt = new Patient();
 		pt.addName().addFamily(methodName);
-		IIdType id = ourClient.create().resource(pt)
+		pt.getMeta().addSecurity().setCode("the_code").setSystem("the_system").setDisplay("the code");
+
+    IIdType id = ourClient.create().resource(pt)
       .withAdditionalHeader("Authorization", "Bearer Admin").execute().getId();
+
+    // This is super repetitive and should be refactored ...
 
 		Patient pt2 = ourClient.read().resource(Patient.class).withId(id)
       .withAdditionalHeader("Authorization", "Bearer Admin").execute();
 		assertEquals(methodName, pt2.getName().get(0).getFamily().get(0).getValue());
+
+    Patient pt3 = ourClient.read().resource(Patient.class).withId(id)
+      .withAdditionalHeader("Authorization", "Bearer the_code").execute();
+    assertEquals(methodName, pt3.getName().get(0).getFamily().get(0).getValue());
+
+    try {
+      ourClient.read().resource(Patient.class).withId(id)
+        .withAdditionalHeader("Authorization", "Bearer wrong_code").execute();
+      Assert.fail("No exception thrown for expected 403 error when accessing a patient using the wrong auth code");
+    } catch(Exception e){
+      // An exception! Assume it was a 403 error.
+    }
 	}
 
 	@AfterClass
