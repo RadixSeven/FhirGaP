@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# Note that this is python3 only
 import argparse
 import requests
 
