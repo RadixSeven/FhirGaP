@@ -2,24 +2,27 @@ FROM hapiproject/hapi:base as build-hapi
 
 ARG HAPI_FHIR_URL=https://github.com/jamesagnew/hapi-fhir/
 ARG HAPI_FHIR_BRANCH=master
-ARG HAPI_FHIR_STARTER_URL=https://github.com/RadixSeven/FhirGaP
-ARG HAPI_FHIR_STARTER_BRANCH=master
 
 RUN git clone --branch ${HAPI_FHIR_BRANCH} ${HAPI_FHIR_URL}
 WORKDIR /tmp/hapi-fhir/
 RUN /tmp/apache-maven-3.6.2/bin/mvn dependency:resolve
 RUN /tmp/apache-maven-3.6.2/bin/mvn install -DskipTests
 
-WORKDIR /tmp
-RUN git clone --branch ${HAPI_FHIR_STARTER_BRANCH} ${HAPI_FHIR_STARTER_URL}
 
-WORKDIR /tmp/hapi-fhir-jpaserver-starter
+ARG REPO_URL_BASE=https://github.com/RadixSeven/
+ARG REPO_URL_SUB=FhirGaP
+ARG REPO_BRANCH=master
+
+WORKDIR /tmp
+RUN git clone --branch ${REPO_BRANCH} ${REPO_URL_BASE}${REPO_URL_SUB}
+
+WORKDIR /tmp/FhirGaP
 RUN /tmp/apache-maven-3.6.2/bin/mvn clean install -DskipTests
 
 FROM tomcat:9-jre11
 
 RUN mkdir -p /data/hapi/lucenefiles && chmod 775 /data/hapi/lucenefiles
-COPY --from=build-hapi /tmp/hapi-fhir-jpaserver-starter/target/*.war /usr/local/tomcat/webapps/
+COPY --from=build-hapi /tmp/FhirGaP/target/*.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
