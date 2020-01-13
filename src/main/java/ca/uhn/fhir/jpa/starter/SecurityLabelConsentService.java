@@ -13,9 +13,25 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-public class SecurityLabelConsentInterceptor implements IConsentService {
+public class SecurityLabelConsentService implements IConsentService {
+  private static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(SecurityLabelConsentService.class);
+
   @Override
   public ConsentOutcome startOperation(RequestDetails requestDetails, IConsentContextServices iConsentContextServices) {
+    Pattern whitespace = Pattern.compile("\\s+");
+    String authText = requestDetails.getHeader("Authorization");
+    String[] authHeader = whitespace.split(authText, 2);
+    if (authHeader.length < 2) {
+      //ourLog.info("Rejecting because authorization \"" + authText + "\" had only " + authHeader.length + " fields" );
+      return ConsentOutcome.REJECT;
+    } else if (!authHeader[0].equals("Bearer")) {
+      //ourLog.info("Rejecting because authorization \"" + authText + "\" started with " + authHeader[0] +
+      //  " instead of Bearer");
+      return ConsentOutcome.REJECT;
+    } else if (authHeader[1].equals("Admin")) {
+      //ourLog.info("Accepting Admin Access!");
+      return ConsentOutcome.AUTHORIZED;
+    }
     return ConsentOutcome.PROCEED;
   }
 
@@ -23,7 +39,7 @@ public class SecurityLabelConsentInterceptor implements IConsentService {
   public ConsentOutcome canSeeResource(RequestDetails requestDetails, IBaseResource iBaseResource, IConsentContextServices iConsentContextServices) {
     Pattern whitespace = Pattern.compile("\\s+");
     String[] authHeader = whitespace.split(requestDetails.getHeader("Authorization"), 2);
-    if (authHeader.length < 2 || authHeader[0] != "Bearer") {
+    if (authHeader.length < 2 || !authHeader[0].equals("Bearer")) {
       return ConsentOutcome.REJECT;
     } else if (authHeader[1] == "Admin") {
       return ConsentOutcome.AUTHORIZED;

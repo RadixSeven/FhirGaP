@@ -34,6 +34,7 @@ import ca.uhn.fhir.rest.server.interceptor.LoggingInterceptor;
 import ca.uhn.fhir.rest.server.interceptor.RequestValidatingInterceptor;
 import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
 import ca.uhn.fhir.rest.server.interceptor.ResponseValidatingInterceptor;
+import ca.uhn.fhir.rest.server.interceptor.consent.ConsentInterceptor;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import java.util.HashSet;
@@ -195,7 +196,8 @@ public class JpaRestfulServer extends RestfulServer {
     /*
      * Add interceptor to ensure security labels work
      */
-    SecurityLabelConsentInterceptor securityInterceptor = new SecurityLabelConsentInterceptor();
+    ConsentInterceptor securityInterceptor = new ConsentInterceptor();
+    securityInterceptor.setConsentService(new SecurityLabelConsentService());
     this.registerInterceptor(securityInterceptor);
 
     /*
