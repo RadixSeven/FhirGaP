@@ -39,9 +39,11 @@ public class ExampleServerDstu2IT {
 
 		Patient pt = new Patient();
 		pt.addName().addFamily(methodName);
-		IIdType id = ourClient.create().resource(pt).execute().getId();
+		IIdType id = ourClient.create().resource(pt)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute().getId();
 
-		Patient pt2 = ourClient.read().resource(Patient.class).withId(id).execute();
+		Patient pt2 = ourClient.read().resource(Patient.class).withId(id)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute();
 		assertEquals(methodName, pt2.getName().get(0).getFamily().get(0).getValue());
 	}
 

@@ -53,9 +53,11 @@ public class ExampleServerDstu3IT {
 
 		Patient pt = new Patient();
 		pt.addName().setFamily(methodName);
-		IIdType id = ourClient.create().resource(pt).execute().getId();
+		IIdType id = ourClient.create().resource(pt)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute().getId();
 
-		Patient pt2 = ourClient.read().resource(Patient.class).withId(id).execute();
+		Patient pt2 = ourClient.read().resource(Patient.class).withId(id)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute();
 		assertEquals(methodName, pt2.getName().get(0).getFamily());
 	}
 
@@ -74,11 +76,13 @@ public class ExampleServerDstu3IT {
 		channel.setPayload("application/json");
 		subscription.setChannel(channel);
 
-		MethodOutcome methodOutcome = ourClient.create().resource(subscription).execute();
+		MethodOutcome methodOutcome = ourClient.create().resource(subscription)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute();
 		IIdType mySubscriptionId = methodOutcome.getId();
 
 		// Wait for the subscription to be activated
-		waitForSize(1, () -> ourClient.search().forResource(Subscription.class).where(Subscription.STATUS.exactly().code("active")).cacheControl(new CacheControlDirective().setNoCache(true)).returnBundle(Bundle.class).execute().getEntry().size());
+		waitForSize(1, () -> ourClient.search().forResource(Subscription.class).where(Subscription.STATUS.exactly().code("active")).cacheControl(new CacheControlDirective().setNoCache(true)).returnBundle(Bundle.class)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute().getEntry().size());
 
 		/*
 		 * Attach websocket
@@ -101,7 +105,8 @@ public class ExampleServerDstu3IT {
 		 */
 		Observation obs = new Observation();
 		obs.setStatus(Observation.ObservationStatus.FINAL);
-		ourClient.create().resource(obs).execute();
+		ourClient.create().resource(obs)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute();
 
 		// Give some time for the subscription to deliver
 		Thread.sleep(2000);
@@ -114,7 +119,8 @@ public class ExampleServerDstu3IT {
 		/*
 		 * Clean up
 		 */
-		ourClient.delete().resourceById(mySubscriptionId).execute();
+		ourClient.delete().resourceById(mySubscriptionId)
+      .withAdditionalHeader("Authorization", "Bearer Admin").execute();
 	}
 
 	@AfterClass
