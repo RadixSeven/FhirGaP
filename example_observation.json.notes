@@ -1,0 +1,10 @@
+{
+    "TODO": [
+        , "tell Jimmy that observation ids are arbitrary ... they don't correspond to anything in the data he gave me but must be unique and are in the same namespace as the Patient ids",
+        , "tell Jimmy that using the loinc code [Age at Specimen Collection] is just a guess"
+        , "tell Jimmy that the units-of-measure site uses meters of mercury. I think it permits mm rather than m as I've written above, but not sure."
+        , "tell Jimmy that the display for the UMLS var is probably not a good one since I don't have access to the UMLS - you have to sign up for an account. Similarly, I can't verify the UMLs URL."
+        , "tell Jimmy that I can't represent the ongology_author field"
+    ]
+}
+
