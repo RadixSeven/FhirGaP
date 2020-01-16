@@ -5,6 +5,7 @@
         , "tell Jimmy that the units-of-measure site uses meters of mercury. I think it permits mm rather than m as I've written above, but not sure."
         , "tell Jimmy that the display for the UMLS var is probably not a good one since I don't have access to the UMLS - you have to sign up for an account. Similarly, I can't verify the UMLs URL."
         , "tell Jimmy that I can't represent the ongology_author field"
-    ]
+        , "for sex, he should use LOINC 21840-4 in an observation and NOT use Patient.gender"
+        , "If a patient is part of multiple studies and consent groups, it should have multiple values listed in the array for the security field"
 }
 
