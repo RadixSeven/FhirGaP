@@ -1,0 +1,117 @@
+{
+    "code": {
+        "coding": [
+            {
+                "code": "phh000001.v1",
+                "display": "harmonized_topmed_bp_systolic_1",
+                "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonized-variable-accession"
+            },
+            {
+                "code": "bp_systolic_1",
+                "display": "bp_systolic_1",
+                "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/topmed-harmonized-variable-descriptions#bp_systolic_1"
+            },
+            {
+                "code": "C2039694",
+                "display": "Systolic blood pressure at rest",
+                "system": "http://www.nlm.nih.gov/research/umls/"
+                "version": "2019AA"
+            }
+        ]
+    },
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "code": "phh000001.v1",
+                        "display": "harmonized_topmed_bp_systolic_1",
+                        "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonized-variable-accession"
+                    },
+                    {
+                        "code": "bp_systolic_1",
+                        "display": "bp_systolic_1",
+                        "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/topmed-harmonized-variable-descriptions#bp_systolic_1"
+                    },
+                    {
+                        "code": "C2039694",
+                        "display": "C2039694",
+                        "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/topmed-asserted-ontological-equivalencies#C2039694"
+                    }
+                ]
+            },
+            "valueQuantity":{
+                "code":"[mm[Hg]]",
+                "system":"http://unitsofmeasure.org",
+                "unit":"mmHg",
+                "value": 111
+            }
+            
+        },
+        {
+            "code": {
+                "coding": [
+                    {
+                        "code": "35659-2",
+                        "display": "Age at specimen collection",
+                        "system": "http://loinc.org"
+                    }
+                ]
+            },
+            "valueQuantity": {
+                "code": "[a_g]",
+                "system": "http://unitsofmeasure.org",
+                "unit": "years",
+                "value": "70"
+            }
+        }
+    ],
+    "context": {
+        "identifier": {
+            "type": {
+                "coding": [
+                    {
+                        "code": "dbgap_study_id",
+                        "display": "dbgap_study_id",
+                        "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonized-variable-accession"
+                    }
+                ]
+            },
+            "value": "phs000007.v29"
+        }
+    },
+    "id": "observation-0",
+    "meta": {
+        "security": [
+            {
+                "code": "phs000007.v29-2",
+                "display": "phs000007.v29 consent code 2",
+                "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#study-consent"
+            }
+        ],
+        "tag": [
+            {
+                "code": "FHS_Original",
+                "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonization_unit"
+            }
+            
+        ]
+    },
+    "resourceType": "Observation",
+    "status": "final",
+    "subject": {
+        "identifier": {
+            "type": {
+                "coding": [
+                    {
+                        "code": "dbgap-subject-id",
+                        "display": "dbGaP Subject id",
+                        "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#dbgap-subject-id"
+                    }
+                ]
+            },
+            "value": "16956"
+        }
+    }
+}
+
