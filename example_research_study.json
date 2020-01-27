@@ -1,4 +1,34 @@
 {
+    "id": {
+        "reference": "research-study-phs000001.v3.p1"
+    }
+    "identifier": {
+        "type": {
+            "coding": [
+                {
+                    "code": "dbgap_study_id",
+                    "display": "dbgap_study_id",
+                    "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#dbgap-study-id"
+                }
+            ]
+        },
+        "value": "phs000001.v3.p1"
+    },
+    "title": "NEI Age-Related Eye Disease Study (AREDS)",
+    "status": {
+        "code": "completed",
+        "display": "Completed",
+        "system": "http://hl7.org/fhir/research-study-status"
+    },
+    "condition": [
+        {
+            "code": "849000",
+            "display": "Total cataract",
+            "system": "http://snomed.info/sct"
+        }
+    ],
+
+    // TODO: finish later
     "code": {
         "coding": [
             {
@@ -46,7 +76,7 @@
                 "unit":"mmHg",
                 "value": 111
             }
-            
+
         },
         {
             "code": {
@@ -94,7 +124,7 @@
                 "code": "FHS_Original",
                 "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonization_unit"
             }
-            
+
         ]
     },
     "resourceType": "Observation",
@@ -114,4 +144,3 @@
         }
     }
 }
-
