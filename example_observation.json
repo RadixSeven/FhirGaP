@@ -14,7 +14,7 @@
             {
                 "code": "C2039694",
                 "display": "Systolic blood pressure at rest",
-                "system": "http://www.nlm.nih.gov/research/umls/"
+                "system": "http://www.nlm.nih.gov/research/umls/",
                 "version": "2019AA"
             }
         ]
@@ -62,24 +62,10 @@
                 "code": "[a_g]",
                 "system": "http://unitsofmeasure.org",
                 "unit": "years",
-                "value": "70"
+                "value": 70
             }
         }
     ],
-    "context": {
-        "identifier": {
-            "type": {
-                "coding": [
-                    {
-                        "code": "dbgap_study_id",
-                        "display": "dbgap_study_id",
-                        "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonized-variable-accession"
-                    }
-                ]
-            },
-            "value": "phs000007.v29"
-        }
-    },
     "id": "observation-0",
     "meta": {
         "security": [
@@ -93,8 +79,12 @@
             {
                 "code": "FHS_Original",
                 "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#harmonization_unit"
+            },
+            {
+                "code": "phs000007.v29",
+                "display": "dbGaP Study phs000007.v29",
+                "system": "https://uri.ncbi.nlm.nih.gov/dbgap-on-fhir/dbgap-concepts#dbgap-study-id"
             }
-            
         ]
     },
     "resourceType": "Observation",
